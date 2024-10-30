@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 const connectDB = require("./config/database")
+const cookieParser = require("cookie-parser")
+const cors = require("cors")
+
+app.use(express.json());
+app.use(cookieParser());
 
 connectDB().then(()=>{
     console.log("Database connection established ...");
