@@ -1,0 +1,21 @@
+{
+  "name": "devconnect-backend",
+  "version": "1.0.0",
+  "description": "platform like tinder to connect with developers",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js",
+    "Express.js",
+    "Javascript"
+  ],
+  "author": "Hitesh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
