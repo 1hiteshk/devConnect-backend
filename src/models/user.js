@@ -67,4 +67,26 @@ const userSchema = new mongoose.Schema({
     }
 },{timestamps:true});
 
+// we can attach methods (functions) on Schema models
+userSchema.methods.getJWT = async function(){
+    const user = this ;
+
+    const token = await jwt.sign({_id: user._id}, "Connect2Dev@365", {
+        expiresIn: "7d"
+    })
+    return token;
+};
+
+userSchema.methods.validatePassword =  async function (passwordInputByUser){
+    const user = this;
+    const passwordHash = user.password;
+// to validate password entered by user and compare this to one stored in DB in hashPassword from using bcrypt.compare()
+    const isPasswordValid = await bcrypt.compare(
+        passwordInputByUser,
+        passwordHash
+    );
+
+    return isPasswordValid;
+}
+
 module.exports = mongoose.model('User', userSchema);
