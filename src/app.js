@@ -13,10 +13,13 @@ app.use(cookieParser());
 
 // Routes
 const authRouter = require('./routes/auth');
-const profileRouter = require('./routes/profile')
+const profileRouter = require('./routes/profile');
+const userRouter = require('./routes/user');
 
 app.use('/api', authRouter);
 app.use('/api', profileRouter); 
+app.use('/api', userRouter);  // This will be used for handling user related requests
+
 
 connectDB().then(()=>{
     console.log("Database connection established ...");
