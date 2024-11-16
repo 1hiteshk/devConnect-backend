@@ -6,8 +6,11 @@ const cors = require("cors")
 
 app.use(cors({
     origin: "http://localhost:5173",
-    credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS','PUT'],
+    credentials: true
 }));
+// Additional configuration if necessary
+app.options('*', cors()); // Allow preflight requests for all routes
 app.use(express.json());
 app.use(cookieParser());
 
@@ -19,7 +22,6 @@ const userRouter = require('./routes/user');
 app.use('/api', authRouter);
 app.use('/api', profileRouter); 
 app.use('/api', userRouter);  // This will be used for handling user related requests
-
 
 connectDB().then(()=>{
     console.log("Database connection established ...");

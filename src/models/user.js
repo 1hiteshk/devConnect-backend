@@ -65,7 +65,7 @@ const userSchema = new mongoose.Schema({
     skills:{
         type: [String]
     }
-},{timestamps:true});
+},{timestamps:true}); 
 
 // we can attach methods (functions) on Schema models
 userSchema.methods.getJWT = async function(){
