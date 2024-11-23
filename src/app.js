@@ -18,10 +18,12 @@ app.use(cookieParser());
 const authRouter = require('./routes/auth');
 const profileRouter = require('./routes/profile');
 const userRouter = require('./routes/user');
+const requestRouter = require('./routes/request');
 
 app.use('/api', authRouter);
 app.use('/api', profileRouter); 
 app.use('/api', userRouter);  // This will be used for handling user related requests
+app.use('/api', requestRouter); // This will be used for handling request related requests accept ,review
 
 connectDB().then(()=>{
     console.log("Database connection established ...");
