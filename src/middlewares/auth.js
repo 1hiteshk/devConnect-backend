@@ -8,7 +8,7 @@ const userAuth = async (req,res,next) => {
       return res.status(401).send("please login!")
     }
 
-    const decodedObj = jwt.verify(token, "Connect2Dev@365");
+    const decodedObj = jwt.verify(token, process.env.JWT_SECRET);
     const {_id} = decodedObj;
     const user = await User.findById(_id);
     if(!user){
