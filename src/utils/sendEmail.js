@@ -32,8 +32,8 @@ const createSendEmailCommand = (toAddress, fromAddress, subject, body) => {
 
 const run = async (subject, body, toEmailId) => {
   const sendEmailCommand = createSendEmailCommand(
-    "1hiteshk@gmail.com", // To address
-    "1hiteshk@gmail.com", // From address
+    toEmailId,
+    "1hiteshk@gmail.com", // from this mail address users will receive mail
     subject,
     body
   );
@@ -43,6 +43,7 @@ const run = async (subject, body, toEmailId) => {
   } catch (caught) {
     if (caught instanceof Error && caught.name === "MessageRejected") {
       const messageRejectedError = caught;
+      
       return messageRejectedError;
     }
     throw caught;

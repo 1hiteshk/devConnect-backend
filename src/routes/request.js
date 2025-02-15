@@ -5,6 +5,7 @@ const { userAuth } = require("../middlewares/auth");
 const ConnectionRequest = require("../models/connectionRequests");
 const User = require("../models/user");
 const sendEmail = require("../utils/sendEmail");
+const { sendEmailService } = require("../utils/emailService");
 // to send connection request
 requestRouter.post(
   `/request/send/:status/:toUserId`,
@@ -47,11 +48,16 @@ requestRouter.post(
       });
 
       const data = await newConnectionRequest.save();
-      const emailRes = await sendEmail.run(
+     /*  const emailRes = await sendEmail.run(
         "A new friend request from " + req.user.firstName + req.user.lastName,
-        req.user.firstName + " is " + status + " in " + toUser.firstName
-      );
-      console.log(emailRes);
+        req.user.firstName + " is " + status + " in " + toUser.firstName,
+        toUser.emailId
+      ); */
+      const emailResponse = await sendEmailService( "A new friend request from " + req.user.firstName + " " + req.user.lastName,
+        req.user.firstName + " is " + status + " in " + toUser.firstName,
+        toUser.emailId);
+     // console.log(emailResponse);
+      //console.log(toUser,'hmm');
 
       res.json({
         message: `${req.user.firstName} is ${status} in ${toUser.firstName}`,
