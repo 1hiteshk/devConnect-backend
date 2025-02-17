@@ -13,7 +13,7 @@ chatRouter.get("/chat/:targetUserId", userAuth, async (req, res) => {
       participants: { $all: [userId, targetUserId] },
     }).populate({
       path: "messages.senderId",
-      select: "firstName lastName",
+      select: "firstName lastName photoUrl",
     });
 
     // If no existing chat found, create a new one 

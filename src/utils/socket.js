@@ -2,6 +2,7 @@ const socket = require("socket.io");
 const crypto = require("crypto");
 const { Chat } = require("../models/chat");
 const ConnectionRequest = require("../models/connectionRequests");
+const { timeStamp } = require("console");
 
 const getSecretRoomId = (userId, targetUserId) => {
   return crypto
@@ -54,7 +55,7 @@ const initializeSocket = (server) => {
           });
 
           await chat.save();
-          io.to(roomId).emit("messageReceived", { firstName, lastName, text }); // we can also send timestamps here date.now()
+          io.to(roomId).emit("messageReceived", { firstName, lastName, text, timeStamp: new Date() }); // we can also send timestamps here date.now()
         } catch (err) {
           console.log(err);
         }
