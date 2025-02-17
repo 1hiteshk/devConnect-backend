@@ -16,7 +16,7 @@ const initializeSocket = (server) => {
     cors: {
       origin: "http://localhost:5173",
     },
-    path: "/api/socket.io", // Set WebSocket path to match production frontend
+   // path: "/api/socket.io", // Set WebSocket path to match production frontend
   });
 
   io.on("connection", (socket) => {
