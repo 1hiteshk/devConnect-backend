@@ -5,6 +5,8 @@ const connectDB = require("./config/database")
 const cookieParser = require("cookie-parser")
 const cors = require("cors");
 const http = require("http");
+const socket = require("socket.io"); // Moved here before usage
+const initializeSocket = require('./utils/socket');
 
 app.use(cors({
     origin: "http://localhost:5173",
@@ -21,12 +23,14 @@ const authRouter = require('./routes/auth');
 const profileRouter = require('./routes/profile');
 const userRouter = require('./routes/user');
 const requestRouter = require('./routes/request');
-const initializeSocket = require('./utils/socket');
+const chatRouter = require('./routes/chat');
+
 
 app.use('/api', authRouter);
 app.use('/api', profileRouter); 
 app.use('/api', userRouter);  // This will be used for handling user related requests
 app.use('/api', requestRouter); // This will be used for handling request related requests accept ,review
+app.use('/api', chatRouter); // This will be used for handling chat related requests
 
 const server = http.createServer(app); // we need this http server for socket.io configuration
 initializeSocket(server);
